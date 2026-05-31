@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雨天備案｜台灣秘密景點地圖</title>
+    <style>
+        /* --- 基礎設定 & 變數 (參考個人作品集風) --- */
+        :root {
+            --primary-color: #4a90e2;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- 橫幅標頭 (參考 YouTuber 範例的大氣視覺) --- */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* --- 篩選按鈕區 (創新點：互動控制) --- */
+        .filter-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+        }
+
+        /* --- 景點卡片網格 (參考寵物照顧網的 Grid 佈局) --- */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto 3rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .spot-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+
+        .spot-img {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+            font-size: 1.2rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .spot-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .spot-tag {
+            align-self: flex-start;
+            background-color: #e1f0fe;
+            color: var(--primary-color);
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 15px;
+            margin-bottom: 0.5rem;
+        }
+
+        .spot-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .spot-desc {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .spot-meta {
+            font-size: 0.85rem;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 0.8rem;
+        }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #2c3e50;
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌧️ 雨天備案 ｜ 台灣秘密景點地圖</h1>
+        <p>外面下大雨？別擔心，全台精選室內寶藏景點，帶你優雅躲雨去！</p>
+    </header>
+
+    <div class="filter-container">
+        <button class="filter-btn active" data-target="all">全部地區</button>
+        <button class="filter-btn" data-target="taipei">台北</button>
+        <button class="filter-btn" data-target="taichung">台中</button>
+        <button class="filter-btn" data-target="kaohsiung">高雄</button>
+    </div>
+
+    <main class="gallery-container" id="gallery">
+        
+        <div class="spot-card" data-category="taipei">
+            <div class="spot-img" style="background-image: url('https://picsum.photos/id/1019/600/400')">市立美術館</div>
+            <div class="spot-info">
+                <span class="spot-tag">文青美學</span>
+                <h3 class="spot-title">台北市立美術館</h3>
+                <p class="spot-desc">極具現代感的純白建築，館內展覽豐富。即使下雨，也能在光影交織的走廊裡拍出絕美藝術照。</p>
+                <div class="spot-meta">📍 台北市中山區 ｜ ⏱️ 週一休館</div>
+            </div>
+        </div>
+
+        <div class="spot-card" data-category="taipei">
+            <div class="spot-img" style="background-image: url('https://picsum.photos/id/367/600/400')">北投圖書館</div>
+            <div class="spot-info">
+                <span class="spot-tag">書香木質</span>
+                <h3 class="spot-title">北投圖書館</h3>
+                <p class="spot-desc">全台最美綠建築圖書館，坐在落地窗邊聽著雨聲、翻著書頁，享受充滿木頭香氣的悠閒午後。</p>
+                <div class="spot-meta">📍 台北市北投區 ｜ ⏱️ 每日開放</div>
+            </div>
+        </div>
+
+        <div class="spot-card" data-category="taichung">
+            <div class="spot-img" style="background-image: url('https://picsum.photos/id/433/600/400')">國立歌劇院</div>
+            <div class="spot-info">
+                <span class="spot-tag">網美建築</span>
+                <h3 class="spot-title">台中國家歌劇院</h3>
+                <p class="spot-desc">由大師伊東豊雄設計，獨特的無樑柱曲牆結構。室內有各式文創市集與咖啡廳，待一整天都不會膩。</p>
+                <div class="spot-meta">📍 台中市西屯區 ｜ ⏱️ 週一休館</div>
+            </div>
+        </div>
+
+        <div class="spot-card" data-category="taichung">
+            <div class="spot-img" style="background-image: url('https://picsum.photos/id/96/600/400')">科博館溫室</div>
+            <div class="spot-info">
+                <span class="spot-tag">自然生態</span>
+                <h3 class="spot-title">植物園熱帶雨林溫室</h3>
+                <p class="spot-desc">巨大的鋼骨玻璃溫室，雨天時雨水打在玻璃上更顯氣氛，彷彿一秒走進真實的熱帶亞馬遜雨林。</p>
+                <div class="spot-meta">📍 台中市北區 ｜ ⏱️ 週一休館</div>
+            </div>
+        </div>
+
+        <div class="spot-card" data-category="kaohsiung">
+            <div class="spot-img" style="background-image: url('https://picsum.photos/id/225/600/400')">高雄流行音樂中心</div>
+            <div class="spot-info">
+                <span class="spot-tag">科技未來</span>
+                <h3 class="spot-title">高雄流行音樂中心</h3>
+                <p class="spot-desc">音浪塔室內常有流行音樂與科技互動展演，走到玻璃帷幕旁還能欣賞雨中浪漫的高雄港景。</p>
+                <div class="spot-meta">📍 高雄市鹽埕區 ｜ ⏱️ 週一休館</div>
+            </div>
+        </div>
+
+        <div class="spot-card" data-category="kaohsiung">
+            <div class="spot-img" style="background-image: url('https://picsum.photos/id/1062/600/400')">大東文化藝術中心</div>
+            <div class="spot-info">
+                <span class="spot-tag">光影藝術</span>
+                <h3 class="spot-title">大東文化藝術中心</h3>
+                <p class="spot-desc">擁有巨大的漏斗形薄膜車棚，雨水會順著漏斗排下，形成室內的特殊水幕景觀，視覺感強烈。</p>
+                <div class="spot-meta">📍 高雄市鳳山區 ｜ ⏱️ 每日開放</div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 雨天備案專案 ｜ 由前端新手精心製作</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.spot-card');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // 1. 切換按鈕的 active 狀態
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // 2. 獲取點擊的地區分類
+                    const target = button.getAttribute('data-target');
+
+                    // 3. 篩選卡片顯示
+                    cards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        if (target === 'all' || target === category) {
+                            card.style.display = 'flex'; // 顯示
+                        } else {
+                            card.style.display = 'none'; // 隱藏
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
