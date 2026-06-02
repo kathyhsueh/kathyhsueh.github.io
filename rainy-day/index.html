@@ -143,7 +143,7 @@
             box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);
         }
 
-        /* --- 3. 特色介紹區 (Features) - 4 欄對稱排版 --- */
+        /* --- 3. 特色介紹區 (Features) --- */
         .features {
             max-width: 1200px;
             margin: -4rem auto 4rem auto;
@@ -238,7 +238,7 @@
             color: white;
         }
 
-        /* RWD 網格 */
+        /* 網格與卡片設計 */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -261,12 +261,14 @@
             box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
         }
 
+        /* 📸 修正圖片橫向放大變形的 CSS 核心 */
         .spot-img {
             width: 100%;
-            height: 230px;
+            aspect-ratio: 16 / 10;        /* 強制維持 16:10 完美比例 */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            image-rendering: -webkit-optimize-contrast; /* 防止縮放時圖片模糊 */
         }
 
         .spot-content {
@@ -324,7 +326,6 @@
             font-weight: 600;
         }
 
-        /* 🏛️ 官網外部連結按鈕樣式 */
         .link-btn {
             display: inline-flex;
             align-items: center;
@@ -365,6 +366,10 @@
             margin-bottom: 3rem;
         }
 
+        .footer-brand {
+            grid-column: span 1;
+        }
+
         .footer-brand h3 {
             color: white;
             font-size: 1.3rem;
@@ -398,6 +403,7 @@
             color: white;
         }
 
+        /* 🔗 底部 GitHub 跳轉連結樣式 */
         .footer-bottom {
             max-width: 1200px;
             margin: 0 auto;
@@ -405,6 +411,23 @@
             border-top: 1px solid #334155;
             text-align: center;
             font-size: 0.85rem;
+        }
+
+        .github-link {
+            color: #fca5a5;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--accent);
+            padding-bottom: 2px;
+            transition: all 0.2s;
+        }
+
+        .github-link:hover {
+            color: white;
+            border-bottom-style: solid;
+            background-color: rgba(225, 29, 72, 0.2);
+            border-radius: 4px;
+            padding: 2px 6px;
         }
 
         /* 斷點優化 */
@@ -420,6 +443,7 @@
 </head>
 <body>
 
+    <!-- 🌐 1. 導覽列 -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">🏛️ TAIWAN<span>MUSEUM</span></a>
@@ -431,6 +455,7 @@
         </div>
     </nav>
 
+    <!-- 🌟 2. 官網大氣首頁 Hero Section -->
     <header class="hero">
         <div class="profile-tag">🌧️ 下雨天不知道去哪？開啟你的雨天知性備案</div>
         <h1>全台 10 大博物館<br>室內觀展指南官方網站</h1>
@@ -438,6 +463,7 @@
         <a href="#explore" class="hero-btn">開始探索展館</a>
     </header>
 
+    <!-- 🛠️ 3. 官網特色介紹區 (Features) -->
     <section class="features">
         <div class="feature-card">
             <span class="feature-icon">✨</span>
@@ -461,12 +487,14 @@
         </div>
     </section>
 
+    <!-- 🗺️ 4. 主體功能區：展館探索 -->
     <section id="explore" class="main-section">
         <div class="section-header">
             <h2>全台展館指南庫</h2>
             <p>點選下方按鈕，快速按區域過濾頂級觀展好去處</p>
         </div>
         
+        <!-- 篩選按鈕列 -->
         <div class="filter-bar">
             <button class="filter-btn active" data-target="all">全部展館</button>
             <button class="filter-btn" data-target="north">北部地區</button>
@@ -474,8 +502,10 @@
             <button class="filter-btn" data-target="south">南部地區</button>
         </div>
 
+        <!-- 景點展示網格 -->
         <div class="grid-container" id="gallery">
             
+            <!-- 景點 1 (北部) -->
             <div class="spot-card" data-category="north">
                 <div class="spot-img" style="background-image: url('./images/npm.jpg')"></div>
                 <div class="spot-content">
@@ -491,6 +521,7 @@
                 </div>
             </div>
 
+            <!-- 景點 2 (北部) -->
             <div class="spot-card" data-category="north">
                 <div class="spot-img" style="background-image: url('./images/tfam.jpg')"></div>
                 <div class="spot-content">
@@ -506,6 +537,7 @@
                 </div>
             </div>
 
+            <!-- 景點 3 (北部) -->
             <div class="spot-card" data-category="north">
                 <div class="spot-img" style="background-image: url('./images/ntm.jpg')"></div>
                 <div class="spot-content">
@@ -521,6 +553,7 @@
                 </div>
             </div>
 
+            <!-- 景點 4 (北部) -->
             <div class="spot-card" data-category="north">
                 <div class="spot-img" style="background-image: url('./images/moca.jpg')"></div>
                 <div class="spot-content">
@@ -536,6 +569,7 @@
                 </div>
             </div>
 
+            <!-- 景點 5 (中部) -->
             <div class="spot-card" data-category="central">
                 <div class="spot-img" style="background-image: url('./images/ntmofa.jpg')"></div>
                 <div class="spot-content">
@@ -551,6 +585,7 @@
                 </div>
             </div>
 
+            <!-- 景點 6 (中部) -->
             <div class="spot-card" data-category="central">
                 <div class="spot-img" style="background-image: url('./images/opera.jpg')"></div>
                 <div class="spot-content">
@@ -566,6 +601,7 @@
                 </div>
             </div>
 
+            <!-- 景點 7 (中部) -->
             <div class="spot-card" data-category="central">
                 <div class="spot-img" style="background-image: url('./images/asia-museum.jpg')"></div>
                 <div class="spot-content">
@@ -581,12 +617,13 @@
                 </div>
             </div>
 
+            <!-- 景點 8 (南部) -->
             <div class="spot-card" data-category="south">
                 <div class="spot-img" style="background-image: url('./images/chimei.jpg')"></div>
                 <div class="spot-content">
                     <span class="spot-tag">西洋古典美學 ｜ 台南市</span>
                     <h3 class="spot-title">奇美博物館</h3>
-                    <p class="spot-desc">希臘神殿與凡爾賽宮風格外觀，極致奢華。館內擁有多元、豐富的西洋藝術繪畫、世界名琴、古兵器與逼真動物標本，看展內容橫跨多個領域。</p>
+                    <p class="spot-desc">希臘神殿與凡爾賽宮風格外觀，極致奢華.館內擁有多元、豐富的西洋藝術繪畫、世界名琴、古兵器與逼真動物標本，看展內容橫跨多個領域。</p>
                     <div class="spot-details">
                         <div>📍 <span>台南市仁德區文華路二段66號</span></div>
                         <div>⏱️ <span>09:30 - 17:30（週三休館）</span></div>
@@ -596,6 +633,7 @@
                 </div>
             </div>
 
+            <!-- 景點 9 (南部) -->
             <div class="spot-card" data-category="south">
                 <div class="spot-img" style="background-image: url('./images/nmtl.jpg')"></div>
                 <div class="spot-content">
@@ -611,6 +649,7 @@
                 </div>
             </div>
 
+            <!-- 景點 10 (南部) -->
             <div class="spot-card" data-category="south">
                 <div class="spot-img" style="background-image: url('./images/kmfa.jpg')"></div>
                 <div class="spot-content">
@@ -629,6 +668,7 @@
         </div>
     </section>
 
+    <!-- 🌐 5. 頁尾 (Footer) -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand">
@@ -652,11 +692,13 @@
                 </ul>
             </div>
         </div>
+        <!-- ✅ 這裡完美結合了資傳系與正確的 GitHub 連結！ -->
         <div class="footer-bottom">
-            <p>&copy; 2026 台灣室內觀展指南地圖 ｜ Taiwan Museum Guide. All Rights Reserved.</p>
+            <p>&copy; 2026 台灣室內觀展指南地圖 ｜ Designed by <a href="https://github.com/kathyhsueh" target="_blank" class="github-link">資傳系 薛凱心 (Kathy Hsueh)</a>. All Rights Reserved.</p>
         </div>
     </footer>
 
+    <!-- JavaScript 核心篩選邏輯 -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const buttons = document.querySelectorAll('.filter-btn');
