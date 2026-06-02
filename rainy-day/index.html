@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>雨天備案｜台灣全台博物館地圖</title>
+    <title>全台觀展指南｜10大博物館室內景點庫</title>
     <style>
-        /* --- 基礎設定 & 變數 --- */
+        /* --- 官網級視覺變數 --- */
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e43f5a;
-            --bg-color: #f4f6f8;
-            --card-bg: #ffffff;
-            --text-color: #34495e;
+            --primary: #1e293b;       /* 質感深藍 */
+            --accent: #e11d48;        /* 時尚美學紅 */
+            --accent-hover: #be123c;
+            --bg-light: #f8fafc;      /* 舒服的背景灰 */
+            --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 10px -1px rgba(15, 23, 42, 0.04);
+            --nav-bg: rgba(255, 255, 255, 0.95);
         }
 
         * {
@@ -21,331 +22,639 @@
             font-family: 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.7;
+            background-color: var(--bg-light);
+            color: #334155;
+            line-height: 1.6;
         }
 
-        /* --- 視覺大氣的網頁標頭 --- */
-        header {
-            background: linear-gradient(135deg, #1f4068, #162447, #e43f5a);
-            color: white;
-            text-align: center;
-            padding: 4.5rem 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        /* --- 1. 頂部導覽列 (Navbar) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-bg);
+            box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
         }
 
-        header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.8rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            letter-spacing: 1px;
-        }
-
-        /* --- 縣市互動篩選按鈕 --- */
-        .filter-container {
+        .nav-container {
             max-width: 1200px;
-            margin: 2.5rem auto;
-            padding: 0 1rem;
+            margin: 0 auto;
+            padding: 1rem;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .filter-btn {
-            background-color: var(--card-bg);
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 0.6rem 1.8rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 1px;
         }
 
-        .filter-btn.active, .filter-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4);
+        .nav-logo span {
+            color: var(--accent);
         }
 
-        /* --- 景點卡片 RWD 網格佈局 --- */
-        .gallery-container {
-            max-width: 1200px;
-            margin: 0 auto 4rem auto;
-            padding: 0 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        .nav-links {
+            display: flex;
+            list-style: none;
             gap: 2.5rem;
         }
 
-        .spot-card {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* --- 2. 官網大氣首頁 Banner (Hero Section) --- */
+        .hero {
+            min-height: 85vh;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.9)), 
+                        url('./images/chimei.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(0,0,0,0.03);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 2rem 2rem;
+            color: white;
+        }
+
+        .profile-tag {
+            background: rgba(225, 29, 72, 0.15);
+            border: 1px solid var(--accent);
+            color: #fca5a5;
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btn {
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.9rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.5);
+        }
+
+        /* --- 3. 特色介紹區 (Features) - 4 欄對稱排版 --- */
+        .features {
+            max-width: 1200px;
+            margin: -4rem auto 4rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem 1.2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f1f5f9;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.88rem;
+            color: #64748b;
+            text-align: justify;
+        }
+
+        /* --- 4. 主體：互動探索區 --- */
+        .main-section {
+            max-width: 1200px;
+            margin: 0 auto 5rem auto;
+            padding: 4rem 1rem 0 1rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* 篩選按鈕列 */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+            padding: 0.65rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* RWD 網格 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .spot-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .spot-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
         }
 
         .spot-img {
             width: 100%;
-            height: 220px;
+            height: 230px;
             background-size: cover;
             background-position: center;
-            position: relative;
             background-repeat: no-repeat;
         }
 
-        .spot-info {
+        .spot-content {
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            background: #fff;
         }
 
         .spot-tag {
             align-self: flex-start;
-            background-color: #ebedef;
-            color: var(--primary-color);
-            padding: 0.25rem 0.9rem;
-            font-size: 0.8rem;
+            background-color: #f1f5f9;
+            color: #475569;
+            padding: 0.2rem 0.75rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            border-radius: 20px;
-            margin-bottom: 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
         }
 
         .spot-title {
-            font-size: 1.35rem;
-            margin-bottom: 0.6rem;
-            color: #1a252f;
+            font-size: 1.3rem;
             font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.6rem;
         }
 
         .spot-desc {
-            font-size: 0.95rem;
-            color: #555;
-            margin-bottom: 1.2rem;
+            font-size: 0.92rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
             flex-grow: 1;
             text-align: justify;
         }
 
-        /* 資訊區塊樣式優化 */
-        .spot-meta {
+        .spot-details {
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1rem;
             font-size: 0.85rem;
-            color: #555;
-            border-top: 1px solid #f1f1f1;
-            padding-top: 0.8rem;
+            color: #64748b;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
+            margin-bottom: 1.2rem;
         }
 
-        .spot-meta div {
+        .spot-details div {
             display: flex;
             align-items: flex-start;
+            gap: 8px;
         }
 
-        .spot-meta span.icon {
-            min-width: 24px;
-        }
-
-        .student-discount {
-            color: #e43f5a;
+        .discount-highlight {
+            color: var(--accent);
             font-weight: 600;
         }
 
-        /* 頁尾 */
+        /* 🏛️ 官網外部連結按鈕樣式 */
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            background-color: #f1f5f9;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+            gap: 4px;
+        }
+
+        .link-btn:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* --- 5. 頁尾 (Footer) --- */
         footer {
-            text-align: center;
-            padding: 2.5rem;
-            background-color: #1a252f;
-            color: #bdc3c7;
+            background-color: var(--primary);
+            color: #94a3b8;
+            padding: 4rem 2rem 2rem 2rem;
             font-size: 0.9rem;
-            border-top: 4px solid var(--accent-color);
+            border-top: 5px solid var(--accent);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand h3 span {
+            color: var(--accent);
+        }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* 斷點優化 */
+        @media (max-width: 1024px) {
+            .features { grid-template-columns: repeat(2, 1fr); margin-top: -2rem; }
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .features { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🌧️ 雨天備案 ｜ 台灣全台看展地圖</h1>
-        <p>外面下大雨？精選全台 10 大頂級博物館與藝術殿堂，掌握 2026 最新票價優雅出發！</p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">🏛️ TAIWAN<span>MUSEUM</span></a>
+            <ul class="nav-links">
+                <li><a href="#">首頁精選</a></li>
+                <li><a href="#explore">展館地圖</a></li>
+                <li><a href="#explore">票價專區</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="profile-tag">🌧️ 下雨天不知道去哪？開啟你的雨天知性備案</div>
+        <h1>全台 10 大博物館<br>室內觀展指南官方網站</h1>
+        <p>優雅避開風雨，開啟知性之旅。我們為您嚴選全台最具代表性的美學與歷史空間，精準整合 2026 最新官方票價與學生專屬優惠資訊。</p>
+        <a href="#explore" class="hero-btn">開始探索展館</a>
     </header>
 
-    <div class="filter-container">
-        <button class="filter-btn active" data-target="all">全部地區</button>
-        <button class="filter-btn" data-target="taipei">台北</button>
-        <button class="filter-btn" data-target="taichung">台中</button>
-        <button class="filter-btn" data-target="tainan">台南</button>
-        <button class="filter-btn" data-target="kaohsiung">高雄</button>
-    </div>
+    <section class="features">
+        <div class="feature-card">
+            <span class="feature-icon">✨</span>
+            <h3>區域互動篩選</h3>
+            <p>完美整合北、中、南三大區域，輕點按鈕即可在響應式網格中即時切換目的地。</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">🎟️</span>
+            <h3>2026 票價核對</h3>
+            <p>全數展館資訊皆精準核對至 2026 官方最新標準，拒絕任何過時與錯誤的票價。</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">📱</span>
+            <h3>極致效能優化</h3>
+            <p>所有本機圖檔皆經過批次壓縮優化，減少伺服器負載，確保行動端快速載入。</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-icon">🏛️</span>
+            <h3>官方網站直達</h3>
+            <p>每張展館卡片皆內嵌直通該博物館官網的跳轉連結，方便查詢最新特展與購票。</p>
+        </div>
+    </section>
 
-    <main class="gallery-container" id="gallery">
+    <section id="explore" class="main-section">
+        <div class="section-header">
+            <h2>全台展館指南庫</h2>
+            <p>點選下方按鈕，快速按區域過濾頂級觀展好去處</p>
+        </div>
         
-        <div class="spot-card" data-category="taipei">
-            <div class="spot-img" style="background-image: url('./images/npm.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #f39c12; color: white;">皇家歷史珍藏</span>
-                <h3 class="spot-title">國立故宮博物院</h3>
-                <p class="spot-desc">世界享譽盛名的華夏文化博物館。館內珍藏近 70 萬件跨越數千年的古代皇家書畫、器物與罕見文獻，雨天來此漫步展廳，深度探索極致的歷史與工藝之美。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台北市士林區至善路二段221號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:00 - 17:00（週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>一般全票 350 元 ｜ <span class="student-discount">本國學生憑學生證免費參觀</span></span></div>
-                </div>
-            </div>
+        <div class="filter-bar">
+            <button class="filter-btn active" data-target="all">全部展館</button>
+            <button class="filter-btn" data-target="north">北部地區</button>
+            <button class="filter-btn" data-target="central">中部地區</button>
+            <button class="filter-btn" data-target="south">南部地區</button>
         </div>
 
-        <div class="spot-card" data-category="taipei">
-            <div class="spot-img" style="background-image: url('./images/tfam.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #2980b9; color: white;">當代前衛藝術</span>
-                <h3 class="spot-title">台北市立美術館 (北美館)</h3>
-                <p class="spot-desc">台灣第一座現代美術館，純白管狀線條的懸挑建築極具視覺震撼。館內主要引進、策劃國內外大型前衛當代藝術展，是文青避雨看展的首選聖地。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台北市中山區中山北路三段181號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:30 - 17:30（週六延長至20:30，週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>一般全票 30 元 ｜ <span class="student-discount">學生憑證優待票 15 元</span></span></div>
+        <div class="grid-container" id="gallery">
+            
+            <div class="spot-card" data-category="north">
+                <div class="spot-img" style="background-image: url('./images/npm.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">皇家歷史珍藏 ｜ 台北市</span>
+                    <h3 class="spot-title">國立故宮博物院</h3>
+                    <p class="spot-desc">世界享譽盛名的華夏文化博物館。館內珍藏近 70 萬件跨越數千年的古代皇家書畫、器物與罕見文獻，雨天來此漫步展廳，深度探索極致的歷史與工藝之美。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台北市士林區至善路二段221號</span></div>
+                        <div>⏱️ <span>09:00 - 17:00（週一休館）</span></div>
+                        <div>🎟️ <span>一般全票 350 元 ｜ <span class="discount-highlight">本國學生憑學生證免費參觀</span></span></div>
+                    </div>
+                    <a href="https://www.npm.gov.tw/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="taipei">
-            <div class="spot-img" style="background-image: url('./images/ntm.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #27ae60; color: white;">古生物與建築</span>
-                <h3 class="spot-title">國立臺灣博物館 (土銀展示館)</h3>
-                <p class="spot-desc">對面高大宏偉的勸業銀行舊址，現為化石恐龍迷的秘密基地。金庫內部保留了當年的神秘構造，大廳展示巨大的恐龍骨架模型，極具神祕與知性色彩。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台北市中正區襄陽路25號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:30 - 17:00（週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>一般全票 30 元 ｜ <span class="student-discount">學生憑證優待票 15 元</span></span></div>
+            <div class="spot-card" data-category="north">
+                <div class="spot-img" style="background-image: url('./images/tfam.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">當代前衛藝術 ｜ 台北市</span>
+                    <h3 class="spot-title">台北市立美術館</h3>
+                    <p class="spot-desc">台灣第一座現代美術館，純白管狀線條的懸挑建築極具視覺震撼。館內主要引進、策劃國內外大型前衛當代藝術展，是文青避雨看展的首選聖地。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台北市中山區中山北路三段181號</span></div>
+                        <div>⏱️ <span>09:30 - 17:30（週六延長至20:30，週一休館）</span></div>
+                        <div>🎟️ <span>一般全票 30 元 ｜ <span class="discount-highlight">學生憑證優待票 15 元</span></span></div>
+                    </div>
+                    <a href="https://www.tfam.museum/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="taipei">
-            <div class="spot-img" style="background-image: url('./images/moca.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #9b59b6; color: white;">古蹟與新銳思潮</span>
-                <h3 class="spot-title">台北當代藝術館 (MOCA)</h3>
-                <p class="spot-desc">紅磚造的日治時期舊建成小學校舍，如今蛻變成全台第一座以「當代藝術」為定位的博物館。展覽充滿社會批判、跨媒介創意，激發前衛的思想碰撞。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台北市大同區長安西路39號</span></div>
-                    <div><span class="icon">⏱️</span><span>10:00 - 18:00（週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>一般全票 100 元 ｜ <span class="student-discount">學生憑證優待票 50 元</span></span></div>
+            <div class="spot-card" data-category="north">
+                <div class="spot-img" style="background-image: url('./images/ntm.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">古生物與建築 ｜ 台北市</span>
+                    <h3 class="spot-title">國立臺灣博物館 (土銀館)</h3>
+                    <p class="spot-desc">對面高大宏偉的勸業銀行舊址，現為化石恐龍迷的秘密基地。金庫內部保留了當年的神秘構造，大廳展示巨大的恐龍骨架模型，極具神祕與知性色彩。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台北市中正區襄陽路25號</span></div>
+                        <div>⏱️ <span>09:30 - 17:00（週一休館）</span></div>
+                        <div>🎟️ <span>一般全票 30 元 ｜ <span class="discount-highlight">學生憑證優待票 15 元</span></span></div>
+                    </div>
+                    <a href="https://www.ntm.gov.tw/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="taichung">
-            <div class="spot-img" style="background-image: url('./images/ntmofa.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #16a085; color: white;">臺灣美術史</span>
-                <h3 class="spot-title">國立臺灣美術館 (國美館)</h3>
-                <p class="spot-desc">亞洲最大的美術館之一。園區建築與自然景觀融合，館內則致力於臺灣美術史的藏品開發與數位藝術展。寬敞舒適的室內動線，即使待上一整天看展也十分愜意。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台中市西區五權西路一段2號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:00 - 17:00（週六日延長至18:00，週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>常設展免費參觀 ｜ <span class="student-discount">學生全館免費（除特定特展外）</span></span></div>
+            <div class="spot-card" data-category="north">
+                <div class="spot-img" style="background-image: url('./images/moca.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">古蹟與新銳思潮 ｜ 台北市</span>
+                    <h3 class="spot-title">台北當代藝術館</h3>
+                    <p class="spot-desc">紅磚造的日治時期舊建成小學校舍，如今蛻變成全台第一座以「當代藝術」為定位的博物館。展覽空間充滿跨媒介創意，激發前衛的思想碰撞。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台北市大同區長安西路39號</span></div>
+                        <div>⏱️ <span>10:00 - 18:00（週一休館）</span></div>
+                        <div>🎟️ <span>一般全票 100 元 ｜ <span class="discount-highlight">學生憑證優待票 50 元</span></span></div>
+                    </div>
+                    <a href="https://www.mocataipei.org.tw/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="taichung">
-            <div class="spot-img" style="background-image: url('./images/opera.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #d35400; color: white;">現代美學建築</span>
-                <h3 class="spot-title">台中國家歌劇院</h3>
-                <p class="spot-desc">由大師伊東豊雄設計，以「美聲涵洞」結構聞名。室內完全無樑柱，充滿流暢的曲牆曲線。除了看劇場表演，更有許多文創品牌、書店與咖啡廳進駐。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台中市西屯區惠來路二段101號</span></div>
-                    <div><span class="icon">⏱️</span><span>11:30 - 21:00（週五六延長至22:00，週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>免費入館參觀 ｜ <span class="student-discount">定期導覽與演出憑學生證享專屬優惠</span></span></div>
+            <div class="spot-card" data-category="central">
+                <div class="spot-img" style="background-image: url('./images/ntmofa.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">臺灣美術史 ｜ 台中市</span>
+                    <h3 class="spot-title">國立臺灣美術館</h3>
+                    <p class="spot-desc">亞洲最大的美術館之一。園區建築與自然景觀融合，館內則致力於臺灣美術史的藏品開發與數位藝術展。寬敞舒適的室內動線，非常適合雨天漫步。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台中市西區五權西路一段2號</span></div>
+                        <div>⏱️ <span>09:00 - 17:00（週一休館）</span></div>
+                        <div>🎟️ <span>常設展免費參觀 ｜ <span class="discount-highlight">學生免門票參觀</span></span></div>
+                    </div>
+                    <a href="https://www.ntmofa.gov.tw/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="taichung">
-            <div class="spot-img" style="background-image: url('./images/asia-museum.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #7f8c8d; color: white;">安藤忠雄幾何學</span>
-                <h3 class="spot-title">亞洲大學現代美術館</h3>
-                <p class="spot-desc">由普立茲克建築獎得主安藤忠雄設計。以三個三角形疊合而成的清水模建築，雨水沖刷在洗鍊的混凝土牆上更顯靜謐之美。內部不定期展出頂級現代雕塑與畫作。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台中市霧峰區柳豐路500號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:30 - 17:00（週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>一般全票 250 元 ｜ <span class="student-discount">學生憑證優惠票 150 元</span></span></div>
+            <div class="spot-card" data-category="central">
+                <div class="spot-img" style="background-image: url('./images/opera.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">現代美學建築 ｜ 台中市</span>
+                    <h3 class="spot-title">台中國家歌劇院</h3>
+                    <p class="spot-desc">由大師伊東豊雄設計，以「美聲涵洞」結構聞名。室內完全無樑柱，充滿流暢的曲牆曲線。除了看劇，更有許多文創品牌、書店與咖啡廳進駐。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台中市西屯區惠來路二段101號</span></div>
+                        <div>⏱️ <span>11:30 - 21:00（週一休館）</span></div>
+                        <div>🎟️ <span>免費入館參觀 ｜ <span class="discount-highlight">學生享專屬節目購票優惠</span></span></div>
+                    </div>
+                    <a href="https://www.npac-ntt.org/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="tainan">
-            <div class="spot-img" style="background-image: url('./images/chimei.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #c0392b; color: white;">西洋古典美學</span>
-                <h3 class="spot-title">奇美博物館</h3>
-                <p class="spot-desc">希臘神殿與凡爾賽宮風格外觀，極致奢華。館內擁有多元、豐富的西洋藝術繪畫、世界名琴、古兵器與逼真的北極熊等自然動物標本，看展內容橫跨多領域。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台南市仁德區文華路二段66號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:30 - 17:30（週三休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>常設展全票 250 元 ｜ <span class="student-discount">學生憑證優惠票 200 元</span></span></div>
+            <div class="spot-card" data-category="central">
+                <div class="spot-img" style="background-image: url('./images/asia-museum.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">安藤忠雄幾何學 ｜ 台中市</span>
+                    <h3 class="spot-title">亞洲大學現代美術館</h3>
+                    <p class="spot-desc">由普立茲克建築獎得主安藤忠雄設計。以三個三角形疊合而成的清水模建築，雨水沖刷在洗鍊的混凝土牆上更顯靜謐之美。內部展出頂級現代藝術。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台中市霧峰區柳豐路500號</span></div>
+                        <div>⏱️ <span>09:30 - 17:00（週一休館）</span></div>
+                        <div>🎟️ <span>一般全票 250 元 ｜ <span class="discount-highlight">學生憑證優惠票 150 元</span></span></div>
+                    </div>
+                    <a href="https://asiamodern.asia.edu.tw/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="tainan">
-            <div class="spot-img" style="background-image: url('./images/nmtl.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #8e44ad; color: white;">百年州廳與文學</span>
-                <h3 class="spot-title">國立臺灣文學館</h3>
-                <p class="spot-desc">前身為日治時期的「臺南州廳」，是一座華麗的馬薩式屋頂國定古蹟。館內規劃了許多多媒體互動的臺灣文學發展展覽，雨天漫步在古典紅磚廊道中，充滿詩意。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>台南市中西區中正路1號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:00 - 18:00（週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>全館免門票參觀 ｜ <span class="student-discount">學生完全免費</span></span></div>
+            <div class="spot-card" data-category="south">
+                <div class="spot-img" style="background-image: url('./images/chimei.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">西洋古典美學 ｜ 台南市</span>
+                    <h3 class="spot-title">奇美博物館</h3>
+                    <p class="spot-desc">希臘神殿與凡爾賽宮風格外觀，極致奢華。館內擁有多元、豐富的西洋藝術繪畫、世界名琴、古兵器與逼真動物標本，看展內容橫跨多個領域。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台南市仁德區文華路二段66號</span></div>
+                        <div>⏱️ <span>09:30 - 17:30（週三休館）</span></div>
+                        <div>🎟️ <span>常設展全票 250 元 ｜ <span class="discount-highlight">學生憑證優惠票 200 元</span></span></div>
+                    </div>
+                    <a href="https://www.chimeimuseum.org/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-        <div class="spot-card" data-category="kaohsiung">
-            <div class="spot-img" style="background-image: url('./images/kmfa.jpg')"></div>
-            <div class="spot-info">
-                <span class="spot-tag" style="background-color: #34495e; color: white;">當代生態藝術</span>
-                <h3 class="spot-title">高雄市立美術館 (高美館)</h3>
-                <p class="spot-desc">座落於美麗的內惟埤文化園區，展覽空間極大、策展視野寬廣多元。雨天在這裡看展、逛逛設計選品店、並在館內的景觀咖啡廳欣賞窗外大雨朦朧的綠意湖景，非常療癒。</p>
-                <div class="spot-meta">
-                    <div><span class="icon">📍</span><span>高雄市鼓山區美術館路80號</span></div>
-                    <div><span class="icon">⏱️</span><span>09:30 - 17:30（週一休館）</span></div>
-                    <div><span class="icon">🎟️</span><span>一般全票 90 元 ｜ <span class="student-discount">學生憑證優待票 45 元</span></span></div>
+            <div class="spot-card" data-category="south">
+                <div class="spot-img" style="background-image: url('./images/nmtl.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">百年州廳與文學 ｜ 台南市</span>
+                    <h3 class="spot-title">國立臺灣文學館</h3>
+                    <p class="spot-desc">前身為日治時期的「臺南州廳」，是一座華麗的國定古蹟。館內規劃了許多多媒體互動的臺灣文學發展展覽，雨天漫步在紅磚廊道中，格外有詩意。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>台南市中西區中正路1號</span></div>
+                        <div>⏱️ <span>09:00 - 18:00（週一休館）</span></div>
+                        <div>🎟️ <span>常設展免門票 ｜ <span class="discount-highlight">學生完全免費參觀</span></span></div>
+                    </div>
+                    <a href="https://www.nmtl.gov.tw/" target="_blank" class="link-btn">前往官方網站 ↗</a>
                 </div>
             </div>
-        </div>
 
-    </main>
+            <div class="spot-card" data-category="south">
+                <div class="spot-img" style="background-image: url('./images/kmfa.jpg')"></div>
+                <div class="spot-content">
+                    <span class="spot-tag">當代生態藝術 ｜ 高雄市</span>
+                    <h3 class="spot-title">高雄市立美術館</h3>
+                    <p class="spot-desc">座落於美麗的內惟埤文化園區，展覽空間極大、策展視野寬廣多元。雨天在這裡看展、逛逛設計選品店、並在館內欣賞窗外大雨朦朧的綠意湖景，非常療癒。</p>
+                    <div class="spot-details">
+                        <div>📍 <span>高雄市鼓山區美術館路80號</span></div>
+                        <div>⏱️ <span>09:30 - 17:30（週一休館）</span></div>
+                        <div>🎟️ <span>一般全票 90 元 ｜ <span class="discount-highlight">學生憑證優待票 45 元</span></span></div>
+                    </div>
+                    <a href="https://www.kmfa.gov.tw/" target="_blank" class="link-btn">前往官方網站 ↗</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <footer>
-        <p>&copy; 2026 台灣全台博物館地圖 ｜ 精緻前端作品集</p>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>🏛️ TAIWAN<span>MUSEUM</span></h3>
+                <p>專為全台熱愛藝文者打造的室內觀展情報官方網站，提供最具公信力的展館數據整合與氣象休閒指南。</p>
+            </div>
+            <div class="footer-links">
+                <h4>平台導覽</h4>
+                <ul>
+                    <li><a href="#">返回頂部</a></li>
+                    <li><a href="#explore">全台展館庫</a></li>
+                    <li><a href="#">最新特展快訊</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>服務權益</h4>
+                <ul>
+                    <li><a href="#">聯絡我們</a></li>
+                    <li><a href="#">使用條款</a></li>
+                    <li><a href="#">隱私權政策</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 台灣室內觀展指南地圖 ｜ Taiwan Museum Guide. All Rights Reserved.</p>
+        </div>
     </footer>
 
     <script>
