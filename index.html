@@ -19,6 +19,20 @@
         <link href="css/styles.css" rel="stylesheet" />
         <!-- !! 請在這裡加上你的自訂 CSS !! -->
         <link href="css/mystyles.css" rel="stylesheet" />
+        
+        <!-- 💡 小優化：幫妳加上點擊作品卡片變小手掌的超連結樣式 -->
+        <style>
+            .portfolio-link {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+                transition: transform 0.2s;
+            }
+            .portfolio-link:hover {
+                transform: translateY(-5px);
+                color: var(--bs-primary);
+            }
+        </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
@@ -71,7 +85,7 @@
                             <h3 class="mb-0">打工</h3>
                             <div class="subheading mb-3"></div>
                             <p>曾在咖啡廳打工，學習到如何煮咖啡做出讓人喜歡的美食，也培養溝通表達與應變能力，並且在補習班做過文書處理的工作。</p>
-                            <p><strong>反思：</strong>咖啡廳的工作讓我學會如何與不同類型的客人溝通，並在忙碌中保持冷靜應變。</p>
+                            <p><strong>反思：</strong>咖啡廳的工作讓我學會如何與 sweat 不同的客人溝通，並在忙碌中保持冷靜應變。</p>
                         </div>
                         <div class="flex-shrink-0"><span class="text-primary"></span></div>
                     </div>
@@ -170,28 +184,38 @@
                     <h2 class="mb-5">作品集</h2>
                     <div class="row text-center">
 
-                <!-- 作品1：旅遊 -->
-                <div class="col-md-4 mb-4">
-                <img src="assets/img/travel.jpg" class="img-fluid rounded shadow mb-2" alt="旅遊" style="width: 200px; height: 150px; object-fit: cover;">
-                <h5>旅遊紀錄</h5>
-                <p class="text-muted">旅遊景點分享</p>
-            </div>
+                        <!-- 🔥 ✅ 新增作品1：全台觀展指南 (排在第一個，點擊會跳轉到新網頁) -->
+                        <div class="col-md-3 mb-4">
+                            <a href="./rainy-day/" target="_blank" class="portfolio-link">
+                                <img src="rainy-day/images/chimei.jpg" class="img-fluid rounded shadow mb-2" alt="全台觀展指南" style="width: 200px; height: 150px; object-fit: cover;">
+                                <h5>全台觀展指南</h5>
+                                <p class="text-muted">10大博物館室內景點庫</p>
+                            </a>
+                        </div>
 
-            <!-- 作品2：美食 -->
-            <div class="col-md-4 mb-4">
-                <img src="assets/img/food.jpg" class="img-fluid rounded shadow mb-2" alt="美食" style="width: 200px; height: 150px; object-fit: cover;">
-                <h5>美食探索</h5>
-                <p class="text-muted">特色料理與餐廳紀錄</p>
-            </div>
-            <!-- 作品3：風景 -->
-            <div class="col-md-4 mb-4">
-                <img src="assets/img/view.jpg" class="img-fluid rounded shadow mb-2" alt="風景" style="width: 200px; height: 150px; object-fit: cover;">
-                <h5>風景攝影</h5>
-                <p class="text-muted">自然風景拍攝</p>
-            </div>
+                        <!-- 作品2：旅遊 (改為 col-md-3 讓排版整齊) -->
+                        <div class="col-md-3 mb-4">
+                            <img src="assets/img/travel.jpg" class="img-fluid rounded shadow mb-2" alt="旅遊" style="width: 200px; height: 150px; object-fit: cover;">
+                            <h5>旅遊紀錄</h5>
+                            <p class="text-muted">旅遊景點分享</p>
+                        </div>
 
-        </div>
-    </div>
+                        <!-- 作品3：美食 -->
+                        <div class="col-md-3 mb-4">
+                            <img src="assets/img/food.jpg" class="img-fluid rounded shadow mb-2" alt="美食" style="width: 200px; height: 150px; object-fit: cover;">
+                            <h5>美食探索</h5>
+                            <p class="text-muted">特色料理與餐廳紀錄</p>
+                        </div>
+                        
+                        <!-- 作品4：風景 -->
+                        <div class="col-md-3 mb-4">
+                            <img src="assets/img/view.jpg" class="img-fluid rounded shadow mb-2" alt="風景" style="width: 200px; height: 150px; object-fit: cover;">
+                            <h5>風景攝影</h5>
+                            <p class="text-muted">自然風景拍攝</p>
+                        </div>
+
+                    </div>
+                </div>
             </section>
         </div>
         <!-- Bootstrap core JS-->
